@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../script.js" type="module"></script>
+</head>
+<body>
+<div class="header" >
+    <div class="head">
+        <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
+    </div>
+    <div class="head">
+        <a onclick="window.location.replace('/signup')"><i class="fa-duotone fa-solid fa-circle-user"></i></a>
+    </div>
+</div>
+<div class="content">
+    <div class="dynamic-grid">
+        <div class="dynamic-tile">
+            <p class="title" id="rectitle">running</p>
+            <hr class="tile-div">
+            <p class="title" id="rectime">time</p>
+            <p class="title" id="recduration">duration</p>
+            <p class="title" id="recdistance">distance</p>
+        </div>
+        <div class="dynamic-tile">
+            a
+        </div>
+        <div class="dynamic-tile">
+            a
+        </div>
+    </div>
+</div>
+<div class="footer" >
+    <div class="nav" id="nav1">
+        <a><i class="fa-duotone fa-solid fa-house" onclick="window.location.replace('../home')"></i></a>
+    </div>
+    <div class="nav" id="nav2">
+        <a><i class="fa-duotone fa-solid fa-square-plus" onclick="window.location.replace('../add-activity')"></i></a>
+    </div>
+    <div class="nav" id="nav3">
+        <a><i class="fa-duotone fa-solid fa-user-group" onclick="window.location.replace('../social')"></i></a>
+    </div>
+    <div class="nav" id="nav4">
+        <a href="./settings/"><i class="fa-duotone fa-solid fa-gear" onclick="window.location.replace('../settings')"></i></a>
+    </div>
+</div>
+</body>
+</html>

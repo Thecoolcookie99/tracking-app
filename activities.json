@@ -1,0 +1,20 @@
+[   
+    {
+        "activity":"run",
+        "date":"1788313311",
+        "durationsec":"360",
+        "distancemeters":"1735"
+    },
+    {
+        "activity":"run",
+        "dateunix":"1788321090",
+        "durationsec":"482",
+        "distancemeters":"2662"
+    },
+    {
+        "activity":"ride",
+        "dateunix":"1777600493",
+        "durationsec":"300",
+        "distancemeters":"1002"
+    }
+]

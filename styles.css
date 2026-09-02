@@ -82,7 +82,53 @@ body {
     margin: 8px;
 }
 
-.tile-div {
+hr {
     width: 90%;
     padding: 0px;
+    border-style: solid;
+    border-color: rgb(64, 64, 64);
+    border-width: 0.5px;
+}
+
+.signup-dialouge {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgb(75, 102, 95); /* Added style so the color shows */
+    border-radius: 5px;
+    background-color: rgb(136, 186, 158);
+    width: max-content;
+    padding: 10px;
+}
+
+#dlgelem {  
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.main {
+    display: grid;
+    place-items: center;
+    min-height: 50vh; /* Ensures the page takes up the full screen height */
+    margin: 0;
+}
+
+input {
+    border-style: solid;
+}
+
+button {
+    border-style: solid;
+    border-width: 1.4px;
+    border-color: darkslategray;
+    color: rgb(0, 36, 24);
+    background-color: rgb(230, 238, 234);
+}
+
+.bottomtext {
+    font-size: 12px;
+    margin: 0px;
+    margin-top: 5px;
+    text-decoration: underline;
+    color: rgb(25, 25, 25);
 }
