@@ -1,7 +1,7 @@
 [   
     {
         "activity":"run",
-        "date":"1788313311",
+        "dateunix":"1788313311",
         "durationsec":"360",
         "distancemeters":"1735"
     },
