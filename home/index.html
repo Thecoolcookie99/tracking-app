@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <script src="../script.js" type="module"></script>
+    <script src="../defer.js" type="module"></script>
+    <script src="../main.js" type="module"></script>
 </head>
 <body>
 <div class="header" >
@@ -10,7 +12,7 @@
         <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
     </div>
     <div class="head">
-        <a onclick="window.location.replace('/signup')"><i class="fa-duotone fa-solid fa-circle-user"></i></a>
+        <a onclick="window.location.replace('../signup')"><i class="fa-duotone fa-solid fa-circle-user"></i></a>
     </div>
 </div>
 <div class="content">
@@ -39,17 +41,16 @@
 </div>
 <div class="footer" >
     <div class="nav" id="nav1">
-        <a><i class="fa-duotone fa-solid fa-house" onclick="window.location.replace('../home')"></i></a>
+        <a href="./"><i class="fa-duotone fa-solid fa-house"></i></a>
     </div>
     <div class="nav" id="nav2">
-        <a><i class="fa-duotone fa-solid fa-square-plus" onclick="window.location.replace('../add-activity')"></i></a>
+        <a href="../addactivity/"><i class="fa-duotone fa-solid fa-square-plus"></i></a>
     </div>
     <div class="nav" id="nav3">
-        <a><i class="fa-duotone fa-solid fa-user-group" onclick="window.location.replace('../social')"></i></a>
+        <a href="../social"></ahref><i class="fa-duotone fa-solid fa-user-group"></i></a>
     </div>
     <div class="nav" id="nav4">
-        <a href="./settings/"><i class="fa-duotone fa-solid fa-gear" onclick="window.location.replace('../settings')"></i></a>
-    </div>
+        <a href="../settings"><i class="fa-duotone fa-solid fa-gear"></i></a>
 </div>
 </body>
 </html>

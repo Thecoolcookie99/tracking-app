@@ -1,5 +1,5 @@
 //get recent activity
-const data = await fetch('../activities.json').then(r => r.json());
+const data = await fetch(window.location.origin + '/json/activities.json').then(r => r.json());
 const rec_act = data[0];
 
 //get stats from recent activity

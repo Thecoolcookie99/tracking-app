@@ -4,7 +4,7 @@ async function submit() {
     const hasheduser = await hash(user)
     const hashedpassword = await hash(password)
 
-    const data = await fetch('../users.json').then(r => r.json());
+    const data = await fetch(window.location.origin + '/json/users.json').then(r => r.json());
     const taken = data.some(u => u.id === hasheduser)
 
     if (taken) {

@@ -1,3 +1,24 @@
-this webpage doesnt exist
+redirecting...
 
-<script>window.location.href = "../home";</script>  
+<script type="module">
+const isloggedin = localStorage.getItem("loggedin");
+const hasheduser = localStorage.getItem("hashedusername")
+const hashedpassword = localStorage.getItem("hashedpassword")
+
+function defer() {
+    window.location.replace(window.location.origin + "/login")
+}
+
+if (isloggedin === "1") {
+    //get user list
+    const data = await fetch(window.location.origin + '/json/users.json').then(r => r.json());
+    const taken = data.some(u => u.id === hasheduser)
+
+    if (taken === true) {
+        const pass = data.filter(u => u.id === hasheduser)[0].password
+        if (pass === hashedpassword) {
+            window.location.replace(window.location.origin + "/home")
+        
+        // otherwise defer
+        }else{defer()}}else{defer()}}else{defer()}
+</script>

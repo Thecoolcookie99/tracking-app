@@ -4,7 +4,7 @@ async function submit() {
     const hasheduser = await hash(user)
     const hashedpassword = await hash(password)
 
-    const data = await fetch('../users.json').then(r => r.json());
+    const data = await fetch(window.location.origin + '/json/users.json').then(r => r.json());
     const userexists = data.some(u => u.id === hasheduser)
 
     var userpassword = ''
@@ -23,7 +23,7 @@ async function submit() {
     localStorage.setItem('hashedusername', hasheduser);
     localStorage.setItem('hashedpassword', hashedpassword);
     localStorage.setItem('loggedin', 1);
-    window.location.replace('../home/index.html')
+    window.location.replace(window.location.origin + '/home/index.html')
     return
 };
 
