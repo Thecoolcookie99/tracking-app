@@ -25,11 +25,11 @@ if (isloggedin === "1") {
                 document.location.replace("../settings")
             }
         } else {
-            defer()
+           // defer() (removed for acc creation)
         }
     } else{
-        defer()
+       // defer()
     }
 } else {
-    defer()
+   defer()
 }
