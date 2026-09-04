@@ -4,7 +4,10 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-<div class="header" >
+
+<script src="other.js"></script>
+
+<div class="header">
     <div class="head">
         <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
     </div>
@@ -14,12 +17,11 @@
     <div class="signup-dialouge">
         <p class="title">Sign In</p>
         <hr>
-        <input type="email" id="dlgelem">
-        <input type="password" id="dlgelem">
-        <button class="submit" id="dlgelem">Login</button>
-        <a class="bottomtext" href="../signup">Sign Up</a>
+        <input type="text"     id="username" class="dlgelem">
+        <input type="password" id="password" class="dlgelem">
+        <button class="submit" id="submit"   class="dlgelem" onclick="submit()">Login</button>
+        <a class="bottomtext" href="../login">Sign Up</a>
     </div>
 </div>
-
 </body>
 </html>
