@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-<div class="header" >
+<script src="script.js" type="module"></script>
+<div class="header">
     <div class="head">
         <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
     </div>
@@ -14,12 +15,12 @@
     <div class="signup-dialouge">
         <p class="title">Sign up</p>
         <hr>
-        <input type="email" id="dlgelem">
-        <input type="password" id="dlgelem">
-        <button class="submit" id="dlgelem">Create account</button>
+        <input type="email"    id="email"    class="dlgelem">
+        <input type="password" id="password" class="dlgelem">
+        <button class="submit" id="submit"   class="dlgelem" onclick="submit()">Create account</button>
         <a class="bottomtext" href="../login">log in</a>
     </div>
 </div>
-
+Allowed characters: a-z, A-Z, 0-9, -, ., _
 </body>
 </html>
