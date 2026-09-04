@@ -1,20 +1,56 @@
-[   
-    {
-        "activity":"run",
-        "dateunix":"1788313311",
-        "durationsec":"360",
-        "distancemeters":"1735"
-    },
-    {
-        "activity":"run",
-        "dateunix":"1788321090",
-        "durationsec":"482",
-        "distancemeters":"2662"
-    },
-    {
-        "activity":"ride",
-        "dateunix":"1777600493",
-        "durationsec":"300",
-        "distancemeters":"1002"
-    }
+[
+  {
+    "activity":"run",
+    "activityname":"quick run",
+    "activitydescription":"i went on a quick jog",
+    "dateunix":"1788313311",
+    "durationsec":"360",
+    "distancemeters":"1735",
+    "otherinfo":""
+  },
+  {
+    "activity":"run",
+    "activityname":"morning run",
+    "activitydescription":"i went for a morning run",
+    "dateunix":"1788321090",
+    "durationsec":"482",
+    "distancemeters":"2662",
+    "otherinfo":""
+  },
+  {
+    "activity":"ride",
+    "activityname":"quick ride",
+    "activitydescription":"i went on a quick bike ride",
+    "dateunix":"1777600493",
+    "durationsec":"300",
+    "distancemeters":"1002",
+    "otherinfo":""
+  },
+  {
+    "activity":"run",
+    "activityname":"easy run",
+    "activitydescription":"i went on an easy run",
+    "dateunix":"1788400000",
+    "durationsec":"540",
+    "distancemeters":"2840",
+    "otherinfo":""
+  },
+  {
+    "activity":"run",
+    "activityname":"evening jog",
+    "activitydescription":"i went for an evening jog",
+    "dateunix":"1788487200",
+    "durationsec":"420",
+    "distancemeters":"2105",
+    "otherinfo":""
+  },
+  {
+    "activity":"ride",
+    "activityname":"bike ride",
+    "activitydescription":"i went for a short bike ride",
+    "dateunix":"1788573600",
+    "durationsec":"720",
+    "distancemeters":"3210",
+    "otherinfo":""
+  }
 ]
