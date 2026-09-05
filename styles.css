@@ -56,11 +56,36 @@ body {
     padding: 20px;
 }
 
+.activity-form {
+    display: grid;
+    gap: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.activity-form .dlgelem {
+    width: 100%;
+    margin: 0 0 8px;
+}
+
+.duration-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+#activity-message {
+    min-height: 1.2em;
+    margin: 0;
+    text-align: center;
+}
+
 .dynamic-grid{
     display: grid;
     grid-auto-rows: auto;
     grid-auto-columns: auto;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    align-items: stretch;
 }
 
 .dynamic-tile{
@@ -76,6 +101,21 @@ body {
     outline-offset: 1px;
     outline-style: solid;
     min-width: 180px;
+}
+
+.dynamic-tile.large {
+    min-height: 220px;
+}
+
+.dynamic-tile.small {
+    min-height: 140px;
+    max-height: 80px
+}
+
+.module-link {
+    display: inline-block;
+    margin: 8px;
+    color: inherit;
 }
 
 .title {
