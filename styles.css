@@ -118,6 +118,76 @@ body {
     color: inherit;
 }
 
+.social-list,
+.settings-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.friend-item {
+    margin: 10px 0;
+    padding: 8px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    outline: 2px solid rgba(180, 180, 180, 0.367);
+}
+
+.friend-item p {
+    margin: 4px;
+}
+
+.friend-username,
+.friend-status {
+    font-size: 0.85rem;
+}
+
+.setting-option {
+    display: block;
+    margin: 14px 0;
+}
+
+.weekly-graph {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+    height: 70px;
+    margin: 12px 18px 10px;
+    padding: 0 4px;
+    border-bottom: 1px solid darkslategray;
+}
+
+.weekly-maximum {
+    position: absolute;
+    top: -16px;
+    left: 0;
+    font-size: 0.75rem;
+}
+
+.weekly-day {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.weekly-bar {
+    width: 100%;
+    min-width: 8px;
+    max-width: 24px;
+    background-color: darkslategray;
+    border-radius: 3px 3px 0 0;
+}
+
+.weekly-day-label {
+    height: 16px;
+    margin-top: 4px;
+    font-size: 0.75rem;
+}
+
 .title {
     margin: 8px;
 }
