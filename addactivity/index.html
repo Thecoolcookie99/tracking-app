@@ -36,10 +36,7 @@
         <input class="dlgelem" id="activitydate" name="activitydate" type="datetime-local" required>
 
         <label for="durationminutes">Duration</label>
-        <div class="duration-inputs">
-            <input class="dlgelem" id="durationminutes" name="durationminutes" type="number" min="0" placeholder="Minutes" required>
-            <input class="dlgelem" id="durationseconds" name="durationseconds" type="number" min="0" max="59" placeholder="Seconds" value="0" required>
-        </div>
+        <input class="dlgelem" id="durationminutes" name="durationminutes" type="number" min="0" step="1" placeholder="Minutes" required>
 
         <label for="distancemeters">Distance (km)</label>
         <input class="dlgelem" id="distancemeters" name="distancemeters" type="number" min="0" step="0.01" required>
@@ -49,6 +46,19 @@
 
         <button class="dlgelem" type="submit">Save activity</button>
         <p id="activity-message" role="status"></p>
+    </form>
+
+    <form class="activity-form" id="stat-log-form">
+        <p class="title">Log calories or water</p>
+        <label for="log-stat">Stat</label>
+        <select id="log-stat" class="dlgelem">
+            <option value="water">Water (ml)</option>
+            <option value="calories">Calories</option>
+        </select>
+        <label for="log-value">Amount</label>
+        <input class="dlgelem" id="log-value" type="number" min="0" step="1" required>
+        <button class="dlgelem" type="submit">Log stat</button>
+        <p id="log-message" role="status"></p>
     </form>
 </div>
 <script src="./activity.js" type="module"></script>

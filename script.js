@@ -110,11 +110,14 @@ function renderRecent(tile) {
 
 //so this code basically is used for different weekly elements
 async function renderWeekly(tile, key, title, unit) {
+    //load the user's daily goal values
     const goals = JSON.parse(localStorage.getItem('goals') || '{}');
+    //use locally logged values when the user has recorded this stat
     const savedLogs = JSON.parse(localStorage.getItem('statLogs') || '[]')
         .filter((log) => log.stat === key && Date.now() - new Date(log.date).getTime() < 7 * 24 * 60 * 60 * 1000);
 
     if (savedLogs.length > 0) {
+        //total the recent local entries for the weekly summary
         const total = savedLogs.reduce((sum, log) => sum + Number(log.value), 0);
         addTitle(tile, title);
         addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
@@ -122,6 +125,7 @@ async function renderWeekly(tile, key, title, unit) {
         return;
     }
 
+    //fall back to the supplied weekly data when there are no local logs
     //gets the right json file for the data requested
     const response = await fetch(window.location.origin + `/json/${key}.json`);
 
@@ -136,16 +140,21 @@ async function renderWeekly(tile, key, title, unit) {
     addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
     if (goals[key] !== undefined) addText(tile, `Daily goal: ${goals[key]} ${unit}`);
     if (tile.classList.contains('large')) {
+        //show the average and graph only on large tiles
         addText(tile, `Average: ${Math.round((total / Math.max(values.length, 1)) * 100) / 100} ${unit}`);
         addWeeklyGraph(tile, values);
     }
 }
 
+//display the sign-in streak popup prepared by the login page
 function showSignInStreakPopup() {
+    //read the one-time popup value
     const streak = localStorage.getItem('pendingSignInStreak');
     if (!streak) return;
 
+    //consume the value so refreshing home does not show it again
     localStorage.removeItem('pendingSignInStreak');
+    //build the popup without requiring extra html on every page
     const popup = document.createElement('div');
     popup.className = 'streak-popup';
     popup.innerHTML = `<div class="streak-popup-content" role="dialog" aria-labelledby="streak-popup-title">
@@ -153,25 +162,31 @@ function showSignInStreakPopup() {
         <p class="title" id="streak-popup-title">Sign-in streak</p>
         <p>You have signed in for <strong>${streak} day${streak === '1' ? '' : 's'}</strong> in a row.</p>
     </div>`;
+    //add the popup to the current page
     document.body.appendChild(popup);
+    //close when the close button or the backdrop is clicked
     popup.querySelector('.streak-popup-close').addEventListener('click', () => popup.remove());
     popup.addEventListener('click', (event) => {
         if (event.target === popup) popup.remove();
     });
 }
 
+//check for a pending popup as soon as home loads
 showSignInStreakPopup();
 
 //render the json entry
 function renderSingle(tile, key, title, field, suffix) {
+    //use the locally calculated activity streak when available
     const savedValue = key === 'streak' ? localStorage.getItem('streak') : null;
 
     if (savedValue !== null) {
+        //render the local streak without waiting for the demo json file
         addTitle(tile, title);
         addText(tile, `${savedValue}${suffix}`);
         return;
     }
 
+    //fall back to the original json value
     //gets json data
     fetch(window.location.origin + `/json/${key}.json`)
         //then displays it on the module
@@ -211,6 +226,7 @@ function renderSocial(tile) {
 }
 
 for (const configuredBox of boxConfiguration) {
+    //read the configured module name and tile size
     //split the value at the slash to get the size AND type
     const [configuredKey, configuredSize = 'sml'] = configuredBox.split('/');
     const key = moduleAliases[configuredKey];
@@ -218,11 +234,12 @@ for (const configuredBox of boxConfiguration) {
 
     console.log(configuredSize)
 
+    //create and attach the configured tile
     //create module
     const tile = createModule(key, configuredSize);
     moduleGrid.appendChild(tile);
 
-    //defineeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    //render the selected module using its configured size
     if (configuredSize === 'sml') {
         if (key === 'recent') renderRecent(tile);
         if (key === 'sleep') renderWeekly(tile, 'sleep', 'Sleep', 'hours');
