@@ -215,6 +215,12 @@ function renderSocial(tile) {
         .then((friends) => {
             addTitle(tile, 'Social');
             addText(tile, `${friends.length} friends`);
+            //show one short friend update when activity visibility is enabled
+            if (friends.length > 0 && localStorage.getItem('showFriendActivity') !== 'false') {
+                const recentFriend = friends[0];
+                const recentActivity = `${recentFriend.displayname}: ${recentFriend.status}`;
+                addText(tile, recentActivity.length > 52 ? `${recentActivity.slice(0, 49)}...` : recentActivity);
+            }
             if (tile.classList.contains('large')) {
                 const link = document.createElement('a');
                 link.className = 'module-link';

@@ -32,13 +32,22 @@ body {
     color: inherit;
 }
 
+.head a {
+    display: inline-block;
+    padding: 5px 8px;
+    margin: -5px -8px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
 .footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: stretch;
+    gap: 10px;
     align-items: center;
     padding: 12px 10px;
     background-color: rgb(188, 191, 191);
@@ -46,10 +55,18 @@ body {
 }
 
 .nav {
+    flex: 1;
+    min-width: 0;
     background-color: azure;
     border-radius: 10px;
     font-size: 1.2rem;
     padding: 8px 12px;
+    text-align: center;
+}
+
+.nav a {
+    display: block;
+    width: 100%;
 }
 
 .content {
@@ -108,8 +125,17 @@ body {
 }
 
 .dynamic-tile.small {
-    min-height: 140px;
-    max-height: 80px
+    min-height: 100px;
+    max-height: 110px;
+    overflow: hidden;
+}
+
+.dynamic-tile.small .title,
+.dynamic-tile.small .module-link {
+    max-width: calc(100% - 16px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .module-link {
