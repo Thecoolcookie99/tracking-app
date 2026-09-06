@@ -23,9 +23,31 @@ async function submit() {
     localStorage.setItem('hashedusername', hasheduser);
     localStorage.setItem('hashedpassword', hashedpassword);
     localStorage.setItem('loggedin', 1);
+    updateSignInStreak();
     window.location.replace(window.location.origin + '/home/index.html')
     return
 };
+
+function getDateKey(date) {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
+
+function updateSignInStreak() {
+    const today = new Date();
+    const todayKey = getDateKey(today);
+    const lastSignIn = localStorage.getItem('lastSignInDate');
+    let streak = Number(localStorage.getItem('signInStreak') || 0);
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    if (lastSignIn !== todayKey) {
+        streak = lastSignIn === getDateKey(yesterday) ? streak + 1 : 1;
+        localStorage.setItem('lastSignInDate', todayKey);
+        localStorage.setItem('signInStreak', String(streak));
+    }
+
+    localStorage.setItem('pendingSignInStreak', String(streak));
+}
 
 async function hash(input) {
   const encoder = new TextEncoder(); const data = encoder.encode(input); const buffer = await crypto.subtle.digest('SHA-256', data); const array = Array.from(new Uint8Array(buffer)); return array.map(b => b.toString(16).padStart(2, '0')).join('');

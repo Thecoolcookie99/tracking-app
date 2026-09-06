@@ -32,6 +32,41 @@
         <button class="dlgelem" type="submit">Save settings</button>
         <p id="settings-message" role="status"></p>
     </form>
+
+    <form class="settings-form" id="goals-form">
+        <p class="title">Daily goals</p>
+        <label class="setting-option" for="sleep-goal">Sleep (hours)
+            <input id="sleep-goal" type="number" min="0" step="0.1" required>
+        </label>
+        <label class="setting-option" for="steps-goal">Steps
+            <input id="steps-goal" type="number" min="0" required>
+        </label>
+        <label class="setting-option" for="water-goal">Water (ml)
+            <input id="water-goal" type="number" min="0" required>
+        </label>
+        <label class="setting-option" for="calories-goal">Calories
+            <input id="calories-goal" type="number" min="0" required>
+        </label>
+        <button class="dlgelem" type="submit">Save goals</button>
+        <p id="goals-message" role="status"></p>
+    </form>
+
+    <form class="settings-form" id="stat-log-form">
+        <p class="title">Log today</p>
+        <label class="setting-option" for="log-stat">Stat
+            <select id="log-stat" class="dlgelem">
+                <option value="water">Water (ml)</option>
+                <option value="calories">Calories</option>
+            </select>
+        </label>
+        <label class="setting-option" for="log-value">Amount
+            <input id="log-value" type="number" min="0" step="1" required>
+        </label>
+        <button class="dlgelem" type="submit">Log stat</button>
+        <p id="log-message" role="status"></p>
+    </form>
+
+    <button class="dlgelem sign-out-button" id="sign-out" type="button">Sign out</button>
 </div>
 <script src="./settings.js" type="module"></script>
 

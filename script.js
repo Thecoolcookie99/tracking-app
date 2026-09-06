@@ -110,6 +110,18 @@ function renderRecent(tile) {
 
 //so this code basically is used for different weekly elements
 async function renderWeekly(tile, key, title, unit) {
+    const goals = JSON.parse(localStorage.getItem('goals') || '{}');
+    const savedLogs = JSON.parse(localStorage.getItem('statLogs') || '[]')
+        .filter((log) => log.stat === key && Date.now() - new Date(log.date).getTime() < 7 * 24 * 60 * 60 * 1000);
+
+    if (savedLogs.length > 0) {
+        const total = savedLogs.reduce((sum, log) => sum + Number(log.value), 0);
+        addTitle(tile, title);
+        addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
+        if (goals[key] !== undefined) addText(tile, `Daily goal: ${goals[key]} ${unit}`);
+        return;
+    }
+
     //gets the right json file for the data requested
     const response = await fetch(window.location.origin + `/json/${key}.json`);
 
@@ -122,11 +134,33 @@ async function renderWeekly(tile, key, title, unit) {
     //add each thing
     addTitle(tile, title);
     addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
+    if (goals[key] !== undefined) addText(tile, `Daily goal: ${goals[key]} ${unit}`);
     if (tile.classList.contains('large')) {
         addText(tile, `Average: ${Math.round((total / Math.max(values.length, 1)) * 100) / 100} ${unit}`);
         addWeeklyGraph(tile, values);
     }
 }
+
+function showSignInStreakPopup() {
+    const streak = localStorage.getItem('pendingSignInStreak');
+    if (!streak) return;
+
+    localStorage.removeItem('pendingSignInStreak');
+    const popup = document.createElement('div');
+    popup.className = 'streak-popup';
+    popup.innerHTML = `<div class="streak-popup-content" role="dialog" aria-labelledby="streak-popup-title">
+        <button class="streak-popup-close" type="button" aria-label="Close">&times;</button>
+        <p class="title" id="streak-popup-title">Sign-in streak</p>
+        <p>You have signed in for <strong>${streak} day${streak === '1' ? '' : 's'}</strong> in a row.</p>
+    </div>`;
+    document.body.appendChild(popup);
+    popup.querySelector('.streak-popup-close').addEventListener('click', () => popup.remove());
+    popup.addEventListener('click', (event) => {
+        if (event.target === popup) popup.remove();
+    });
+}
+
+showSignInStreakPopup();
 
 //render the json entry
 function renderSingle(tile, key, title, field, suffix) {
