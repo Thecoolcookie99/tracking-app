@@ -16,6 +16,12 @@
 <script src="../defer.js" type="module"></script>
 
 <div class="content">
+    <form class="settings-form" id="friend-form">
+        <p class="title">Add friend</p>
+        <input class="dlgelem" id="friend-username" type="text" placeholder="Username" required>
+        <button class="dlgelem" type="submit">Add friend</button>
+        <p id="friend-message" role="status"></p>
+    </form>
     <div class="social-list" id="friend-list"></div>
 </div>
 <script src="./social.js" type="module"></script>

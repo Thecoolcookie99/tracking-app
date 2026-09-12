@@ -54,11 +54,18 @@ form.addEventListener('submit', (event) => {
     const formData = new FormData(form);
     const durationMinutes = Number(formData.get('durationminutes'));
     const distanceKilometers = Number(formData.get('distancemeters'));
+    const activityDate = new Date(formData.get('activitydate'));
+    if (!Number.isFinite(durationMinutes) || durationMinutes <= 0 || durationMinutes > 1440 ||
+        !Number.isFinite(distanceKilometers) || distanceKilometers < 0 || distanceKilometers > 1000 ||
+        Number.isNaN(activityDate.getTime()) || activityDate > new Date()) {
+        message.textContent = 'Enter realistic activity details.';
+        return;
+    }
     const activity = {
         activity: formData.get('activity'),
         activityname: formData.get('activityname').trim(),
         activitydescription: formData.get('activitydescription').trim(),
-        dateunix: Math.floor(new Date(formData.get('activitydate')).getTime() / 1000).toString(),
+        dateunix: Math.floor(activityDate.getTime() / 1000).toString(),
         durationsec: (durationMinutes * 60).toString(),
         distancemeters: Math.round(distanceKilometers * 1000).toString(),
         otherinfo: formData.get('otherinfo').trim()
@@ -83,10 +90,18 @@ statLogForm.addEventListener('submit', (event) => {
     event.preventDefault();
     //load the existing stat log entries
     const logs = JSON.parse(localStorage.getItem('statLogs') || '[]');
+    const stat = document.querySelector('#log-stat').value;
+    const value = Number(document.querySelector('#log-value').value);
+    const maximums = { sleep: 24, steps: 100000, water: 20000, calories: 10000 };
+    const maximum = maximums[stat];
+    if (!Number.isFinite(value) || value <= 0 || value > maximum) {
+        logMessage.textContent = 'Enter a realistic stat value.';
+        return;
+    }
     //add the selected value with the current date
     logs.push({
-        stat: document.querySelector('#log-stat').value,
-        value: Number(document.querySelector('#log-value').value),
+        stat,
+        value,
         date: new Date().toISOString()
     });
     //save the updated log for the home page

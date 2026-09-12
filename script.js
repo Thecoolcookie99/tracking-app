@@ -11,7 +11,8 @@ const savedBoxes = await fetch(window.location.origin + '/json/usersavedboxes.js
 const allActivities = [...savedActivities, ...activities];
 
 //fancy way to just get each item rather than the number at the start
-const boxConfiguration = Object.values(savedBoxes[0] || {});
+const savedWidgetConfiguration = JSON.parse(localStorage.getItem('enabledWidgets') || 'null');
+const boxConfiguration = savedWidgetConfiguration || Object.values(savedBoxes[0] || {});
 
 //defines what the first part of each is as it must be 5 characters
 const moduleAliases = {
@@ -48,6 +49,31 @@ function addText(tile, text) {
     value.className = 'title';
     value.textContent = text;
     tile.appendChild(value);
+}
+
+//show progress toward the saved goal for a health stat
+function addGoalProgress(tile, key, value, unit) {
+    const defaultGoals = { sleep: 8, steps: 10000, water: 2000, calories: 2000, streak: 7 };
+    const goals = { ...defaultGoals, ...JSON.parse(localStorage.getItem('goals') || '{}') };
+    const goal = Number(goals[key]);
+    if (!goal) return;
+
+    const row = document.createElement('div');
+    row.className = 'goal-row';
+
+    const label = document.createElement('div');
+    label.className = 'goal-label';
+    label.textContent = `Goal: ${Math.round(Number(value) * 100) / 100} / ${goal} ${unit}`;
+
+    const progress = document.createElement('progress');
+    progress.className = 'goal-progress';
+    progress.max = goal;
+    progress.value = Math.min(Math.max(Number(value), 0), goal);
+    progress.setAttribute('aria-label', `${key} goal progress`);
+
+    row.appendChild(label);
+    row.appendChild(progress);
+    tile.appendChild(row);
 }
 
 function addWeeklyGraph(tile, values) {
@@ -110,8 +136,6 @@ function renderRecent(tile) {
 
 //so this code basically is used for different weekly elements
 async function renderWeekly(tile, key, title, unit) {
-    //load the user's daily goal values
-    const goals = JSON.parse(localStorage.getItem('goals') || '{}');
     //use locally logged values when the user has recorded this stat
     const savedLogs = JSON.parse(localStorage.getItem('statLogs') || '[]')
         .filter((log) => log.stat === key && Date.now() - new Date(log.date).getTime() < 7 * 24 * 60 * 60 * 1000);
@@ -119,9 +143,13 @@ async function renderWeekly(tile, key, title, unit) {
     if (savedLogs.length > 0) {
         //total the recent local entries for the weekly summary
         const total = savedLogs.reduce((sum, log) => sum + Number(log.value), 0);
+        const today = new Date().toDateString();
+        const todayTotal = savedLogs
+            .filter((log) => new Date(log.date).toDateString() === today)
+            .reduce((sum, log) => sum + Number(log.value), 0);
         addTitle(tile, title);
         addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
-        if (goals[key] !== undefined) addText(tile, `Daily goal: ${goals[key]} ${unit}`);
+        addGoalProgress(tile, key, todayTotal, unit);
         return;
     }
 
@@ -138,7 +166,7 @@ async function renderWeekly(tile, key, title, unit) {
     //add each thing
     addTitle(tile, title);
     addText(tile, `${Math.round(total * 100) / 100} ${unit} this week`);
-    if (goals[key] !== undefined) addText(tile, `Daily goal: ${goals[key]} ${unit}`);
+    addGoalProgress(tile, key, values[values.length - 1] || 0, unit);
     if (tile.classList.contains('large')) {
         //show the average and graph only on large tiles
         addText(tile, `Average: ${Math.round((total / Math.max(values.length, 1)) * 100) / 100} ${unit}`);
@@ -183,6 +211,7 @@ function renderSingle(tile, key, title, field, suffix) {
         //render the local streak without waiting for the demo json file
         addTitle(tile, title);
         addText(tile, `${savedValue}${suffix}`);
+        addGoalProgress(tile, key, savedValue, suffix.trim());
         return;
     }
 
@@ -194,6 +223,7 @@ function renderSingle(tile, key, title, field, suffix) {
         .then((data) => {
             addTitle(tile, title);
             addText(tile, `${data[0]?.[field] || 0}${suffix}`);
+            addGoalProgress(tile, key, data[0]?.[field] || 0, suffix.trim());
         });
 
 }

@@ -1,5 +1,11 @@
 async function submit() {
     const user = document.getElementById('username').value
+    const profile = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        age: Number(document.getElementById('age').value),
+        weight: Number(document.getElementById('weight').value)
+    };
     const password = document.getElementById('password').value
     const hasheduser = await hash(user)
     const hashedpassword = await hash(password)
@@ -15,11 +21,16 @@ async function submit() {
         alert('Password must be at least 10 chars')
         return
     };
+    if (!profile.name || !profile.email || profile.age < 13 || profile.age > 120 || profile.weight < 1 || profile.weight > 500) {
+        alert('Enter valid profile details')
+        return
+    };
     
     alert('User successfully created!')
     localStorage.setItem('username', user);
     localStorage.setItem('hashedusername', hasheduser);
     localStorage.setItem('hashedpassword', hashedpassword);
+    localStorage.setItem('profile', JSON.stringify(profile));
     localStorage.setItem('loggedin', 1);
     window.location.replace('../home/index.html')
     return
